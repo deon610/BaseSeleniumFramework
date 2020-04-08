@@ -19,14 +19,13 @@ public class BaseTest
 	@BeforeSuite
 	public void initialize() throws IOException
 	{
-		 String currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
-		 String propertiesPath = currentPath + "\\src\\main\\java\\designBase\\data.properties";
+		String currentPath = Paths.get(".").toAbsolutePath().normalize().toString();
+		String propertiesPath = currentPath + "\\src\\main\\java\\designBase\\data.properties";
 		FileInputStream fis = new FileInputStream(propertiesPath);
 		Properties prop = new Properties();
 		String chromDriverPath = currentPath + "\\chromedriver.exe";
 		prop.load(fis);
 		System.setProperty("webdriver.chrome.driver", chromDriverPath);
-		// ChromeDriverManager.chromeDriver();
 		String headless = prop.getProperty("headless");
 		if (headless.equals("true"))
 		{
