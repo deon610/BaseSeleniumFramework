@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * A Singleton class that allows users to use the properties files
  */
@@ -12,6 +15,7 @@ public class PropertyUtility
 {
 	private static PropertyUtility CURR_INSTANCE = null;
 	private final Properties props = new Properties();
+	private static final Logger LOG = LoggerFactory.getLogger(DriverFactoryUtility.class);
 
 	private PropertyUtility()
 	{
@@ -94,10 +98,11 @@ public class PropertyUtility
 			} else
 			{
 				throw new FileNotFoundException("Properties file " + path + "' not found in the given classpath");
+				
 			}
 		} catch (final Exception e)
 		{
-			e.printStackTrace();
+			LOG.error("Error: {}",e);
 		} finally
 		{
 			try
@@ -105,7 +110,7 @@ public class PropertyUtility
 				inpStream.close();
 			} catch (final IOException e)
 			{
-				e.printStackTrace();
+				LOG.error("Error: {}",e);
 			}
 		}
 
